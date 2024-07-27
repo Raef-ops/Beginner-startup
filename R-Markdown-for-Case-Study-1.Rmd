@@ -1,0 +1,39 @@
+---
+title: "My First Project(unfinished)"
+output: html_document
+date: "2024-07-27"
+---
+This is my first attempt at conducting my own personal study. Then, study focused on findings key factors of casual members vs subscriber of bycicles rentals.
+```{r setup, converting cvs to a data frame}
+June2024<- read.csv("202406-divvy-tripdata.csv")
+May2024<-read.csv("202405-divvy-tripdata.csv")
+April2024<-read.csv("202404-divvy-tripdata.csv")
+March2024<-read.csv("202403-divvy-tripdata.csv")
+February2024<-read.csv("202402-divvy-tripdata.csv")
+January2024<-read.csv("202401-divvy-tripdata.csv")
+December2023<-read.csv("202312-divvy-tripdata.csv")
+November2023<-read.csv("202311-divvy-tripdata.csv")
+October2023<-read.csv("202310-divvy-tripdata.csv")
+September2023<-read.csv("202309-divvy-tripdata.csv")
+August2023<-read.csv("202308-divvy-tripdata.csv")
+July2023<-read.csv("202307-divvy-tripdata.csv")
+```
+
+## Step 2- Merge all dataframes together
+```{r Cycling_Months}
+Cycling_Months<-list(June2024,May2024,April2024,March2024,February2024,January2024,December2023,November2023,October2023,September2023,August2023,July2023)
+```
+
+## Step 3- Clean and organize the data
+In this step, I removed any null values and removed the previous dataframes to prevent too much clustering in the data.
+```{r clean & organize}
+na.omit(Cycling_Months)
+rm(June2024,May2024,April2024,March2024,February2024,January2024,December2023,November2023,October2023,September2023,August2023,July2023)
+```
+## step 4- Create column (Ride_lenght) in the dataframe
+In this step, I created a column by subsctrating the time it ended by the time it started to obtain the new column
+```{R Create a Column}
+Cycling_Months$ride_length <- ymd_hms(Cycling_Months$ended_at) - ymd_hms(Cycling_Months$started_at)
+```
+## continuation
+the project is not finished yet, my next step is to figure how to be able to use ggplot() to visualize the data.
